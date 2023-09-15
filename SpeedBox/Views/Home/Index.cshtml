@@ -1,0 +1,55 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container">
+    <h1>Расчет стоимости доставки</h1>
+    <form asp-model="">
+        <div class="form-group mb-3">
+            <label for="weight">Вес в граммах:</label>
+            <input required type="text" class="form-control" value="@ViewBag.Weight" name="weight" placeholder="Введите вес в граммах">
+        </div>
+
+        <div class="form-group  mb-3">
+            <label for="dimensions">Длина в мм:</label>
+            <input required type="text" class="form-control" value="@ViewBag.Length" name="length" placeholder="Введите длину в мм">
+        </div>
+
+        <div class="form-group  mb-3">
+            <label for="dimensions">Ширина в мм:</label>
+            <input required type="text" class="form-control" value="@ViewBag.Width" name="width" placeholder="Введите ширину в мм">
+        </div>
+
+        <div class="form-group  mb-3">
+            <label for="dimensions">Высота в мм:</label>
+            <input required type="text" class="form-control" value="@ViewBag.Height" name="height" placeholder="Введите высоту в мм">
+        </div>
+
+        <div class="form-group  mb-3">
+            <label for="cityFrom">ФИАС код города отправления:</label>
+            <input required type="text" class="form-control" value="@ViewBag.CityFrom" name="cityFrom" placeholder="Введите ФИАС код города отправления">
+        </div>
+
+        <div class="form-group  mb-3">
+            <label for="cityTo">ФИАС код города получения:</label>
+            <input required type="text" class="form-control" value="@ViewBag.CityTo" name="cityTo" placeholder="Введите ФИАС код города получения">
+        </div>
+
+        <button type="submit" asp-controller="Home" asp-action="CalculateShippingCost" class="btn btn-primary">Рассчитать стоимость доставки</button>
+    </form>
+    <div class="mt-3">
+        <h3>Итоговая стоимость доставки:</h3>
+        @{
+            int number;
+            bool isDigit = int.TryParse(ViewBag.CostDelivrey, out number);
+            if (isDigit)
+            {
+                <p class="alert alert-success">@ViewBag.CostDelivrey</p>
+            }
+            else
+            {
+                <p class="alert alert-danger">@ViewBag.CostDelivrey</p>  
+            }
+        }
+    </div>
+</div>
